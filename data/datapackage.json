@@ -1,0 +1,267 @@
+{
+  "name": "product-analytics-datasets",
+  "title": "Datasets used in Product Experimentation and Customer Value Analytics",
+  "description": "Two public third-party datasets used by the analyses in this repository: the Cookie Cats mobile-game A/B test (90,189 players) and the CDNOW transaction log (69,659 purchases by 23,570 customers, January 1997 to June 1998) with derived customer summaries. The files are unmodified copies; see DATA_DICTIONARY.md.",
+  "version": "1.0.0",
+  "keywords": [
+    "A/B testing",
+    "customer lifetime value",
+    "retention",
+    "BG/NBD",
+    "reproducibility"
+  ],
+  "licenses": [
+    {
+      "name": "not-specified",
+      "title": "No licence stated by the original owners. Included unmodified for research and education; the datasets remain the property of their original owners. The repository code is MIT-licensed."
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Kévine Musoni",
+      "role": "maintainer"
+    }
+  ],
+  "resources": [
+    {
+      "name": "cookie-cats",
+      "path": "raw/cookie_cats.csv",
+      "title": "Cookie Cats A/B test",
+      "description": "One row per player (90,189 players) randomised to the first progress gate at level 30 (control) or level 40 (treatment), with game rounds and day-1 and day-7 retention.",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "bytes": 2707296,
+      "hash": "sha256:91bb91e2e25f42f6bd6d4920346d8f89ecb82fe442b257272cc258dbcc8e9c97",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "userid",
+            "type": "integer",
+            "title": "Player ID",
+            "description": "Unique identifier of the player (one row per player).",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "version",
+            "type": "string",
+            "title": "Experiment arm",
+            "description": "First progress gate the player was randomly assigned on install: gate_30 (control) or gate_40 (treatment).",
+            "constraints": {
+              "required": true,
+              "enum": [
+                "gate_30",
+                "gate_40"
+              ]
+            }
+          },
+          {
+            "name": "sum_gamerounds",
+            "type": "integer",
+            "title": "Game rounds played",
+            "description": "Number of game rounds played by the player during the first 14 days after install (per the original DataCamp description).",
+            "constraints": {
+              "required": true,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "retention_1",
+            "type": "boolean",
+            "title": "Day-1 retention",
+            "description": "True if the player came back and played 1 day after installing.",
+            "trueValues": [
+              "TRUE"
+            ],
+            "falseValues": [
+              "FALSE"
+            ]
+          },
+          {
+            "name": "retention_7",
+            "type": "boolean",
+            "title": "Day-7 retention",
+            "description": "True if the player came back and played 7 days after installing.",
+            "trueValues": [
+              "TRUE"
+            ],
+            "falseValues": [
+              "FALSE"
+            ]
+          }
+        ],
+        "primaryKey": "userid"
+      },
+      "sources": [
+        {
+          "title": "Cookie Cats: original release for DataCamp's 'Mobile Games A/B Testing with Cookie Cats' project (game by Tactile Entertainment); this copy was taken from a public GitHub mirror."
+        }
+      ]
+    },
+    {
+      "name": "cdnow-master",
+      "path": "raw/CDNOW_master.txt",
+      "title": "CDNOW transaction log",
+      "description": "Whitespace-aligned text with a header row: customer_id (zero-padded string), date (YYYYMMDD), number_of_cds (units bought), dollar_value (purchase value in US dollars). 69,659 purchases by 23,570 customers, 1997-01-01 to 1998-06-30.",
+      "format": "txt",
+      "mediatype": "text/plain",
+      "encoding": "utf-8",
+      "bytes": 1950500,
+      "hash": "sha256:eff6889ed364c5199d6eacbbeb7a6d559971df4406ac876f322c373f00a072ef",
+      "profile": "data-resource",
+      "sources": [
+        {
+          "title": "CDNOW: made available by Peter Fader and Bruce Hardie for research use and distributed with the open-source lifetimes package, from which these files were taken."
+        }
+      ]
+    },
+    {
+      "name": "cdnow-sample",
+      "path": "raw/CDNOW_sample.txt",
+      "title": "CDNOW transaction log, 2,357-customer sample",
+      "description": "Whitespace-aligned text with no header row and five columns: customer_id (as in the master file), sample customer number (1 to 2,357), date (YYYYMMDD), number of CDs, dollar value. 6,919 purchases.",
+      "format": "txt",
+      "mediatype": "text/plain",
+      "encoding": "utf-8",
+      "bytes": 228327,
+      "hash": "sha256:6fae10155c0b0ba363c2c386e30f77990d22328220efd862a5edd1443420d94a",
+      "profile": "data-resource",
+      "sources": [
+        {
+          "title": "CDNOW: made available by Peter Fader and Bruce Hardie for research use and distributed with the open-source lifetimes package, from which these files were taken."
+        }
+      ]
+    },
+    {
+      "name": "cdnow-customers-summary",
+      "path": "raw/cdnow_customers_summary.csv",
+      "title": "CDNOW recency/frequency summary",
+      "description": "Recency, frequency and age for each of the 2,357 sample customers over the 39-week calibration period.",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "bytes": 40079,
+      "hash": "sha256:09d92ca80daaabe8be0f997d4c539f9c9606106baa5b199081fe01cbce5fa9f6",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "ID",
+            "type": "integer",
+            "title": "Sample customer number",
+            "description": "Customer number within the 2,357-customer CDNOW sample (1 to 2,357); matches the second column of CDNOW_sample.txt.",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "frequency",
+            "type": "integer",
+            "title": "Repeat purchases",
+            "description": "Number of repeat purchases (purchases after the first) in the calibration period.",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "recency",
+            "type": "number",
+            "title": "Recency (weeks)",
+            "description": "Weeks between the customer's first and last purchase in the calibration period; 0 when there is no repeat purchase.",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "T",
+            "type": "number",
+            "title": "Customer age (weeks)",
+            "description": "Weeks between the customer's first purchase and the end of the calibration period (the first 39 weeks).",
+            "constraints": {
+              "minimum": 0
+            }
+          }
+        ],
+        "primaryKey": "ID"
+      },
+      "sources": [
+        {
+          "title": "CDNOW: made available by Peter Fader and Bruce Hardie for research use and distributed with the open-source lifetimes package, from which these files were taken."
+        }
+      ]
+    },
+    {
+      "name": "cdnow-customers-summary-with-transactions",
+      "path": "raw/cdnow_customers_summary_with_transactions.csv",
+      "title": "CDNOW summary with mean repeat-purchase value",
+      "description": "As cdnow_customers_summary.csv, plus zbar, the mean value of repeat purchases, for the Gamma-Gamma spend model.",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8",
+      "bytes": 57085,
+      "hash": "sha256:7ddd11b55be3227edfc1d58675154e96971b0de3ad37ddd9280d1dba154b8b2f",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "ID",
+            "type": "integer",
+            "title": "Sample customer number",
+            "description": "As in cdnow_customers_summary.csv.",
+            "constraints": {
+              "required": true,
+              "unique": true
+            }
+          },
+          {
+            "name": "x",
+            "type": "integer",
+            "title": "Repeat purchases",
+            "description": "Number of repeat purchases in the calibration period (same quantity as frequency).",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "t_x",
+            "type": "number",
+            "title": "Recency (weeks)",
+            "description": "Weeks between first and last purchase in the calibration period (same quantity as recency).",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "T",
+            "type": "number",
+            "title": "Customer age (weeks)",
+            "description": "Weeks between first purchase and the end of the calibration period.",
+            "constraints": {
+              "minimum": 0
+            }
+          },
+          {
+            "name": "zbar",
+            "type": "number",
+            "title": "Mean repeat-purchase value",
+            "description": "Mean dollar value of the customer's repeat purchases in the calibration period; 0 when there are none.",
+            "constraints": {
+              "minimum": 0
+            }
+          }
+        ],
+        "primaryKey": "ID"
+      },
+      "sources": [
+        {
+          "title": "CDNOW: made available by Peter Fader and Bruce Hardie for research use and distributed with the open-source lifetimes package, from which these files were taken."
+        }
+      ]
+    }
+  ]
+}

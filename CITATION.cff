@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Product Experimentation and Customer Value Analytics"
+type: software
+authors:
+  - family-names: Musoni
+    given-names: Kévine
+version: 1.0.0
+date-released: 2026-10-26
+license: MIT
+repository-code: "https://github.com/KevineMusoni/Product-Analytics"
+abstract: >-
+  Two end-to-end analyses of questions product data scientists answer every week: an A/B test of a
+  retention experiment (90,189 players) and cohort retention and customer lifetime value modelling
+  (23,570 customers, BG/NBD and Gamma-Gamma models) validated on a holdout. Metrics are defined in SQL
+  (DuckDB), the analysis is in Python, and the models are checked against reference results by an
+  automated test suite and a mutation check. Third-party datasets are documented in DATA_DICTIONARY.md.
+keywords:
+  - A/B testing
+  - customer lifetime value
+  - retention
+  - BG/NBD
+  - reproducibility
+  - open science
+references:
+  - type: article
+    authors:
+      - family-names: Fader
+        given-names: Peter S.
+      - family-names: Hardie
+        given-names: Bruce G. S.
+      - family-names: Lee
+        given-names: Ka Lok
+    title: "Counting your customers the easy way: an alternative to the Pareto/NBD model"
+    journal: Marketing Science
+    volume: 24
+    issue: 2
+    year: 2005
+  - type: article
+    authors:
+      - family-names: Fader
+        given-names: Peter S.
+      - family-names: Hardie
+        given-names: Bruce G. S.
+      - family-names: Lee
+        given-names: Ka Lok
+    title: "RFM and CLV: using iso-value curves for customer base analysis"
+    journal: Journal of Marketing Research
+    volume: 42
+    issue: 4
+    year: 2005

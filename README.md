@@ -93,9 +93,13 @@ at a time; the test suite catches every one.
 
 ```
 ├── data/raw/                 public datasets (see Data sources)
+├── data/datapackage.json     machine-readable dataset metadata (Frictionless Data Package)
+├── DATA_DICTIONARY.md        every dataset: provenance, fields, units, known quality issues
+├── CITATION.cff              how to cite this repository
 ├── notebooks/                the two analyses, executed with outputs
 ├── reports/figures/          charts used in this README
 ├── scripts/mutation_check.py checks that the tests catch deliberate errors
+├── scripts/check_metadata.py checks that the data still matches its documentation
 ├── sql/                      metric definitions run with DuckDB
 ├── src/prodanalytics/
 │   ├── experiment.py         SRM, z-test, power, bootstrap, Bayesian, Holm
@@ -122,6 +126,20 @@ python -m jupyter nbconvert --to notebook --execute --inplace notebooks/*.ipynb
 file (via `prodanalytics.data.load_cdnow_transactions()`). Run the notebook, or that function, before running
 the query on its own.
 
+## Data dictionary and metadata
+
+Every dataset is described twice, so people and software can both find out what a file contains before using it:
+
+* [`DATA_DICTIONARY.md`](DATA_DICTIONARY.md) gives, for each file, its provenance, the meaning, type and range of
+  every field, and known quality issues (zero-value purchases, one extreme outlier, the slight sample-ratio
+  imbalance).
+* [`data/datapackage.json`](data/datapackage.json) is the same information in the open
+  [Frictionless Data Package](https://specs.frictionlessdata.io/data-package/) standard, with file sizes and
+  SHA-256 checksums so any change to a file is detectable.
+
+[`scripts/check_metadata.py`](scripts/check_metadata.py) confirms that the files on disk still match this
+documentation (checksums, column names, keys and value constraints), and GitHub Actions runs it on every push.
+
 ## Data sources
 
 * **Cookie Cats A/B test:** originally released for DataCamp's "Mobile Games A/B Testing with Cookie Cats"
@@ -137,3 +155,12 @@ Fader, P., Hardie, B. and Lee, K. (2005). "RFM and CLV: using iso-value curves f
 *Journal of Marketing Research* 42(4).
 
 Code is released under the MIT licence; the datasets remain the property of their original owners.
+
+## How to cite
+
+GitHub shows a "Cite this repository" button from [`CITATION.cff`](CITATION.cff). In plain text:
+
+> Musoni, K. (2026). *Product Experimentation and Customer Value Analytics* (version 1.0.0) [Software].
+> https://github.com/KevineMusoni/Product-Analytics
+
+Please also cite the original dataset owners and the Fader, Hardie and Lee papers listed above.

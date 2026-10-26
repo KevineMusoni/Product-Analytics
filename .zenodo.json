@@ -1,0 +1,11 @@
+{
+  "title": "Product Experimentation and Customer Value Analytics",
+  "upload_type": "software",
+  "description": "Two end-to-end analyses: an A/B test of a retention experiment (90,189 players) and cohort retention and customer lifetime value modelling (23,570 customers, BG/NBD and Gamma-Gamma) validated on a holdout. Metrics are defined in SQL (DuckDB), the analysis is in Python, and the models are checked against reference results by an automated test suite and a mutation check. Third-party datasets are documented in DATA_DICTIONARY.md and data/datapackage.json.",
+  "creators": [
+    {"name": "Musoni, Kévine"}
+  ],
+  "license": "MIT",
+  "keywords": ["A/B testing", "customer lifetime value", "retention", "BG/NBD", "reproducibility", "open science"],
+  "access_right": "open"
+}

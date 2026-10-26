@@ -12,6 +12,8 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python -m pytest -q
+      - name: Check the data still matches its documentation
+        run: python scripts/check_metadata.py
       - run: python scripts/mutation_check.py
       - name: Re-run both notebooks end to end
         run: python -m jupyter nbconvert --to notebook --execute --output-dir /tmp/executed notebooks/*.ipynb
